@@ -1,6 +1,12 @@
 grammar LASM::Grammar {
     token TOP {
-        [\h* <label>? \h* <instruction>? \h*] ** "\n"
+        <labelled-instruction> ** "\n"
+    }
+
+    token labelled-instruction {
+        | \h* <label> \h*
+        | \h* <instruction> \h*
+        | \h* <label> \h* <instruction> \h*
     }
 
     token label {
