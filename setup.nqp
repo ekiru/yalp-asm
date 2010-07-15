@@ -20,16 +20,43 @@ sub MAIN() {
         pir_nqp             => unflatten(
             'build/LASM/Grammar.pir',  'src/LASM/Grammar.pm',
             'build/LASM/Compiler.pir', 'src/LASM/Compiler.pm',
+
+            'build/LOST/Node.pir',     'src/LOST/Node.pm',
+            'build/LOST/File.pir',     'src/LOST/File.pm',
+            'build/LOST/Label.pir',    'src/LOST/Label.pm',
+            'build/LOST/Op.pir',       'src/LOST/Op.pm',
+            'build/LOST/Value.pir',    'src/LOST/Value.pm',
+            'build/LOST/Constant.pir', 'src/LOST/Constant.pm',
+            'build/LOST/Register.pir', 'src/LOST/Register.pm',
+            'build/LOST.pir',          'src/LOST.pm',
         ),
         pbc_pir             => unflatten(
             'build/LASM/Grammar.pbc',  'build/LASM/Grammar.pir',
-            'lasm/lasm.pbc',          'build/LASM/Compiler.pir',
+            'lasm/lasm.pbc',           'build/LASM/Compiler.pir',
             'lasm.pbc',                'lasm.pir',
+
+            'build/LOST/Node.pbc',     'build/LOST/Node.pir',
+            'build/LOST/File.pbc',     'build/LOST/File.pir',
+            'build/LOST/Label.pbc',    'build/LOST/Label.pir',
+            'build/LOST/Op.pbc',       'build/LOST/Op.pir',
+            'build/LOST/Value.pbc',    'build/LOST/Value.pir',
+            'build/LOST/Constant.pbc', 'build/LOST/Constant.pir',
+            'build/LOST/Register.pbc', 'build/LOST/Register.pir',
+            'build/LOST.pbc',          'build/LOST.pir',
         ),
 
         # install
         inst_lib            => <
             build/LASM/Grammar.pbc
+
+            build/LOST/Node.pbc
+            build/LOST/File.pbc
+            build/LOST/Label.pbc
+            build/LOST/Op.pbc
+            build/LOST/Value.pbc
+            build/LOST/Constant.pbc
+            build/LOST/Register.pbc
+            build/LOST.pbc
         >,
 
         inst_lang           => <
