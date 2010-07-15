@@ -1,0 +1,28 @@
+&'main':
+    init I0 +5
+    push I0
+    call &'fact'
+    pop I1
+    coerce S0 I1
+    print S0
+    init S1 ~"\n"
+    print S1
+    end 
+
+&'fact':
+    pop I0
+    init I1 +1
+    islt I2 I0 I1
+    not I3 I2
+    if I3 &'base_case'
+    sub I4 I0 I1
+    push I4
+    call &'fact'
+    pop I5
+    mul I6 I0 I5
+    push I6
+    ret
+&'base_case':
+    init I4 +1
+    push I4
+    ret
