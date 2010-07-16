@@ -7,7 +7,7 @@
     print S0
     init S1 ~"\n"
     print S1
-    end 
+    end
 
 &'fact':
     pop I0
