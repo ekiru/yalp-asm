@@ -19,6 +19,7 @@ sub MAIN() {
         # build
         pir_nqp             => unflatten(
             'build/LASM/Grammar.pir',  'src/LASM/Grammar.pm',
+            'build/LASM/Actions.pir',  'src/LASM/Actions.pm',
             'build/LASM/Compiler.pir', 'src/LASM/Compiler.pm',
 
             'build/LOST/Node.pir',     'src/LOST/Node.pm',
@@ -32,6 +33,7 @@ sub MAIN() {
         ),
         pbc_pir             => unflatten(
             'build/LASM/Grammar.pbc',  'build/LASM/Grammar.pir',
+            'build/LASM/Actions.pbc',  'build/LASM/Actions.pir',
             'lasm/lasm.pbc',           'build/LASM/Compiler.pir',
             'lasm.pbc',                'lasm.pir',
 
@@ -48,6 +50,7 @@ sub MAIN() {
         # install
         inst_lib            => <
             build/LASM/Grammar.pbc
+            build/LASM/Actions.pbc
 
             build/LOST/Node.pbc
             build/LOST/File.pbc

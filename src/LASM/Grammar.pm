@@ -1,4 +1,4 @@
-grammar LASM::Grammar {
+grammar LASM::Grammar is HLL::Grammar {
     token TOP {
         <labelled-instruction> ** "\n"
     }
@@ -14,68 +14,54 @@ grammar LASM::Grammar {
     }
 
     token label-name {
-        '&' "'" \w+ "'"
+        '&' "'" (\w+) "'"
     }
 
     proto token instruction {<...>}
 
-    token instruction:sym<call> {
-        <sym> \h+ <label-name>
+    token instruction:sym<no-arg> {
+        $<name>=['end' | 'ret']
     }
 
-    token instruction:sym<coerce> {
-        <sym> \h+ $<dest>=<register> \h+ $<src>=<register>
+    token instruction:sym<lab> {
+        $<name>='call' \h+ <label-name>
     }
 
-    token instruction:sym<end> {
-        <sym>
+    token instruction:sym<reg> {
+        $<name>=<r-op> \h+ <register>
     }
 
-    token instruction:sym<if> {
-        <sym> \h+ <register> \h+ <label-name>
+    token r-op {
+        'pop' | 'print' | 'push'
     }
 
-    token instruction:sym<init> {
-        <sym> \h+ <register> \h+ <constant>
+    token instruction:sym<reg-const> {
+        $<name>='init' \h+ <register> \h+ <constant>
     }
 
-    token instruction:sym<islt> {
-        <sym> \h+ $<dest>=<register> \h+
+    token instruction:sym<reg-lab> {
+        $<name>='if' \h+ <register> \h+ <label-name>
+    }
+
+    token instruction:sym<reg-reg> {
+        $<name>=<rr-op> \h+ $<dest>=<register> \h+ $<src>=<register>
+    }
+
+    token rr-op {
+        'coerce'|'not'
+    }
+
+    token instruction:sym<reg-reg-reg> {
+        $<name>=<rrr-op> \h+ $<dest>=<register> \h+
         $<left>=<register> \h+ $<right>=<register>
     }
 
-    token instruction:sym<mul> {
-        <sym> \h+ $<dest>=<register> \h+
-        $<left>=<register> \h+ $<right>=<register>
-    }
-
-    token instruction:sym<not> {
-        <sym> \h+ $<dest>=<register> \h+ $<src>=<register>
-    }
-
-    token instruction:sym<pop> {
-        <sym> \h+ <register>
-    }
-
-    token instruction:sym<print> {
-        <sym> \h+ <register>
-    }
-
-    token instruction:sym<push> {
-        <sym> \h+ <register>
-    }
-
-    token instruction:sym<ret> {
-        <sym>
-    }
-
-    token instruction:sym<sub> {
-        <sym> \h+ $<dest>=<register> \h+
-        $<left>=<register> \h+ $<right>=<register>
+    token rrr-op {
+        'islt' | 'mul' | 'sub'
     }
 
     token register {
-        [ 'I' |  'N' | 'S' | 'P' ] <digit>+
+        $<type>=['I' |  'N' | 'S' | 'P' ] $<number>=[<digit>+]
     }
 
     proto token constant { <...> }
