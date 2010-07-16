@@ -2,12 +2,11 @@ class LOST::Node is Capture;
 
 method new (*@children, *%attrs) {
     my $self := pir::new__PP(self.HOW.get_parrotclass(self));
-    for @children -> $child {
-        self.push($child);
-    }
+    $self.push(|@children);
     for %attrs -> $pair {
-        self{$pair.key} := $pair.value;
+        $self{$pair.key} := $pair.value;
     }
+    $self;
 }
 
 method attr ($name, $value?, $default?) {
@@ -20,4 +19,10 @@ method attr ($name, $value?, $default?) {
 
 method name ($value?) {
     self.attr('name', $value, '');
+}
+
+method push (*@values) {
+    for @values -> $v {
+        pir::push(self, $v);
+    }
 }
