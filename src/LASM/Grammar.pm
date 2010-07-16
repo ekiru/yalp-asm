@@ -69,4 +69,8 @@ grammar LASM::Grammar is HLL::Grammar {
     token constant:sym<+> {
         <sym> (<digit>+)
     }
+
+    token constant:sym<~> {
+        <sym> <?before '"'> <quote_EXPR: ':qq'>
+    }
 }

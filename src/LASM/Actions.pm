@@ -66,4 +66,9 @@ class LASM::Actions {
     method constant:sym<+> ($/) {
         make LOST::Constant.new(:type<I>, :value(+$<value>));
     }
+
+    method constant:sym<~> ($/) {
+        make LOST::Constant.new(:type<S>, :value($<quote_EXPR>.ast));
+    }
+
 }
