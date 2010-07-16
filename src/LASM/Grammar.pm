@@ -1,6 +1,6 @@
 grammar LASM::Grammar is HLL::Grammar {
     token TOP {
-        <labelled-instruction> ** "\n"
+        <labelled-instruction> ** "\n"+
     }
 
     token labelled-instruction {
